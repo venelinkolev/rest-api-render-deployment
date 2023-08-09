@@ -3,8 +3,7 @@ const env = process.env.NODE_ENV || 'development';
 const config = {
   development: {
     port: process.env.PORT || 5000,
-    dbURL:
-      'mongodb+srv://venelinkolev:AtlasVenelinKolev83MongoDB@cluster0.41cjroa.mongodb.net/recipes?retryWrites=true&w=majority',
+    dbURL: process.env.MONGO_URI,
     origin: ['http://localhost:5555', 'http://localhost:4200'],
   },
   production: {
