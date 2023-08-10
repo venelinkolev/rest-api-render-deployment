@@ -9,10 +9,7 @@ const config = {
   production: {
     port: process.env.PORT || 5000,
     dbURL: process.env.MONGO_URI,
-    origin: [
-      'https://venelinkolev.github.io/recipes-angular-project',
-      'http://localhost:4200',
-    ],
+    origin: ['https://venelinkolev.github.io', 'http://localhost:4200'],
   },
 };
 
