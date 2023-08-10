@@ -9,7 +9,7 @@ const config = {
   production: {
     port: process.env.PORT || 5000,
     dbURL: process.env.MONGO_URI,
-    origin: [],
+    origin: ['http://localhost:4200'],
   },
 };
 
