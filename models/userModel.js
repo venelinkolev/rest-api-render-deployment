@@ -1,5 +1,5 @@
-const mongoose = require("mongoose");
-const bcrypt = require("bcrypt");
+const mongoose = require('mongoose');
+const bcrypt = require('bcrypt');
 const saltRounds = Number(process.env.SALTROUNDS) || 5;
 
 const { ObjectId } = mongoose.Schema.Types;
@@ -9,25 +9,25 @@ const userSchema = new mongoose.Schema(
     firstName: {
       type: String,
       required: true,
-      minlength: [2, "Username should be at least 2 characters"],
+      minlength: [2, 'Username should be at least 2 characters'],
       validate: {
         validator: function (v) {
-          return /[a-zA-Z0-9]+/g.test(v);
+          return /[a-zA-Z0-9\u0400-\u04FF]+/g.test(v);
         },
         message: (props) =>
-          `${props.value} must contains only latin letters and digits!`,
+          `${props.value} must contains only letters and digits!`,
       },
     },
     lastName: {
       type: String,
       required: true,
-      minlength: [2, "Username should be at least 2 characters"],
+      minlength: [2, 'Username should be at least 2 characters'],
       validate: {
         validator: function (v) {
-          return /[a-zA-Z0-9]+/g.test(v);
+          return /[a-zA-Z0-9\u0400-\u04FF]+/g.test(v);
         },
         message: (props) =>
-          `${props.value} must contains only latin letters and digits!`,
+          `${props.value} must contains only letters and digits!`,
       },
     },
     // tel: {
@@ -53,7 +53,7 @@ const userSchema = new mongoose.Schema(
     password: {
       type: String,
       required: true,
-      minlength: [5, "Password should be at least 5 characters"],
+      minlength: [5, 'Password should be at least 5 characters'],
       validate: {
         validator: function (v) {
           return /[a-zA-Z0-9]+/g.test(v);
@@ -71,7 +71,7 @@ const userSchema = new mongoose.Schema(
     //     ref: "Post"
     // }]
   },
-  { timestamps: { createdAt: "created_at" } }
+  { timestamps: { createdAt: 'created_at' } }
 );
 
 userSchema.methods = {
@@ -80,8 +80,8 @@ userSchema.methods = {
   },
 };
 
-userSchema.pre("save", function (next) {
-  if (this.isModified("password")) {
+userSchema.pre('save', function (next) {
+  if (this.isModified('password')) {
     bcrypt.genSalt(saltRounds, (err, salt) => {
       if (err) {
         next(err);
@@ -99,4 +99,4 @@ userSchema.pre("save", function (next) {
   next();
 });
 
-module.exports = mongoose.model("User", userSchema);
+module.exports = mongoose.model('User', userSchema);
